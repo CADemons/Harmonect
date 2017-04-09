@@ -1,0 +1,3 @@
+[submodule "python-mingus"]
+	path = python-mingus
+	url = https://github.com/bspaans/python-mingus
