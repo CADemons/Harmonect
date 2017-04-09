@@ -2,7 +2,6 @@
 import freenect
 import cv2
 import frame_convert2
-import csv
 import numpy
 
 cv2.namedWindow('Depth')
@@ -18,7 +17,7 @@ def get_video():
     return frame_convert2.video_cv(freenect.sync_get_video()[0])
 
 
-keyHeld = False;
+keyHeld = False
 while 1:
     depth = get_depth()
     cv2.imshow('Depth', depth)
@@ -27,8 +26,8 @@ while 1:
     if key == ord(' ') and not keyHeld:
         print "Space pressed"
         numpy.savetxt('data.csv', depth, fmt='%d', delimiter=',')
-        keyHeld = True;
+        keyHeld = True
     else:
-        keyHeld = False;
+        keyHeld = False
     if key == 27:
         break
