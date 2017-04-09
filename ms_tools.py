@@ -9,5 +9,4 @@ def getDepth(dsRate):
 
 def thinLineFilter(img, filterPx):
     opened = ndimage.binary_opening(img, iterations=filterPx)
-    closed = ndimage.binary_closing(opened, iterations=filterPx)
-    return closed
+    return opened
