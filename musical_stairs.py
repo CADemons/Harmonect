@@ -3,16 +3,11 @@ import sys
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
-import freenect
-import frame_convert2
 
+import ms_tools
 import auto_calib
 import step_detect
 import music
-
-
-def getDepth(dsRate):
-    return frame_convert2.pretty_depth_cv(freenect.sync_get_depth()[0])[::dsRate, ::dsRate]
 
 
 if __name__ == '__main__':
@@ -26,7 +21,7 @@ if __name__ == '__main__':
     waitMs = int(sys.argv[4])
     filterPx = int(sys.argv[5])
 
-    base = getDepth(dsRate)
+    base = ms_tools.getDepth(dsRate)
     plt.figure()
     plt.imshow(base, cmap=plt.cm.gray)
     plt.show(block=False)
@@ -36,7 +31,7 @@ if __name__ == '__main__':
     while 1:
         cv2.namedWindow('Depth')
         print('Press ESC in window to stop')
-        depth = getDepth(dsRate)
+        depth = ms_tools.getDepth(dsRate)
         diff = base - depth
         vid = np.where(diff > depthThresh, 255, 0).astype(np.dtype('uint8'))
         cv2.imshow('Depth', vid)
