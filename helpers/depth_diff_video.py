@@ -19,7 +19,7 @@ while 1:
     depth = get_depth()
     if based:
         diff = base - depth
-        vid = np.where(diff > 2, np.array([255]).astype(np.dtype('uint8')), 0)
+        vid = np.where(diff > 3, np.array([255]).astype(np.dtype('uint8')), 0)
         cv2.imshow('Depth', vid)
     else:
         cv2.imshow('Depth', depth)
