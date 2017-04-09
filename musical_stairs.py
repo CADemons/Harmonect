@@ -32,12 +32,11 @@ if __name__ == '__main__':
         cv2.namedWindow('Depth')
         print('Press ESC in window to stop')
         depth = ms_tools.getDepth(dsRate)
-        diff = base - depth
-        vid = np.where(diff > depthThresh, 255, 0).astype(np.dtype('uint8'))
+
+        steps, vid = step_detect.getStepArr(masks, base, depth, depthThresh, filterPx)
         cv2.imshow('Depth', vid)
         key = cv2.waitKey(waitMs)
 
-        steps, vid = step_detect.getStepArr(masks, base, depth, depthThresh, filterPx)
         music.processSteps(steps)
 
         if key == ord(' ') and not spaceHeld:
