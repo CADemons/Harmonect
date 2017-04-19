@@ -88,6 +88,7 @@ class State:
 
 	"""
 	def play(self):
+		fluidsynth.init("GeneralUser GS v1.471.sf2")
 		fluidsynth.play_NoteContainer(NoteContainer(self.map))
 
 
