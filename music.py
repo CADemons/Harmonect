@@ -1,4 +1,4 @@
-# music.py - 
+# music.py -
 import math, time
 import mingus.core.notes as notes
 import mingus.core.scales as scales
@@ -21,16 +21,12 @@ def processSteps(steps, prev_state=None):
     :returns current_state: Returns the current state of the what's playing, so you can call it again in another call of 
     processSteps.  
     """
+    fluidsynth.init("GeneralUser GS v1.471.sf2")
     current_state = State(steps)
 
-    # while loop so it continues to play via current state definied by an initialization of a state object.
-    
-    #fluidsynth.init("GeneralUser GS v1.471.sf2")
-    print(current_state.map)
-    #print(scales.Diatonic("C", (3, 7), 2))
+    print("Current state", current_state.map)
 
-    #fluidsynth.play_Note(Note("C"))
-    current_state.play(2)
+    current_state.play(4) # 4 seconds is the sweet spot
 
     return current_state
 
@@ -58,8 +54,9 @@ class State:
     def __drawMap(self):
         tmp = []
         dia = scales.Diatonic('C', (3,7),int(math.ceil((len(self.steps) / 7.0))))
-        for x in range(0, len(self.steps)-1):
-            tmp.append(dia.ascending()[x])
+        for x in range(0, len(self.steps)):
+            if self.steps[x]:
+                tmp.append(dia.ascending()[x])
         return tmp
 
     """
@@ -70,11 +67,19 @@ class State:
 
     def __mapNotes(self, oc=4):
         tmp = []
+        ocm = oc
+        added = []
         m = self.__drawMap()
-        for x in range(0, len(m)-1):
-            if (x % 7 == 0 and x != 0):
+        for x in range(0, len(m)):
+            if x % 7 == 0 and x != 0:
                 oc += 1
-            tmp.append(Note(m[x], oc))
+            if m[x] in added:
+                ocm = oc + 1
+                tmp.append(Note(m[x], ocm))
+            else:
+                tmp.append(Note(m[x], oc))
+            added.append(m[x])
+        
         return tmp
 
     """
@@ -95,6 +100,4 @@ class State:
         time.sleep(t)
 
 
-fluidsynth.init("GeneralUser GS v1.471.sf2")
-processSteps([True,False,False,False,False,False,False,True,False,True])
-#print(notes.int_to_note(9))
+processSteps([True,False,True,False,False,False,False,True,False,True])
