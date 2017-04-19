@@ -25,7 +25,7 @@ def processSteps(steps, prev_state=None):
     current_state = State(steps)
 
     print("Current state", current_state.map)
-
+    if (prev_state != None): prev_state.play(4)
     current_state.play(4) # 4 seconds is the sweet spot
 
     return current_state
