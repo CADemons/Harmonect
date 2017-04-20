@@ -43,7 +43,7 @@ class State:
     """
     def __init__(self, steps):
         self.steps = steps
-        self.map = self.__mapNotes()
+        self.map = self.__drawMap()
 
     """
     Draws the map based on the current step progression.
@@ -51,35 +51,19 @@ class State:
     :private:
 
     """
-    def __drawMap(self):
+    def __drawMap(self, oc=4):
         tmp = []
-        dia = scales.Diatonic('C', (3,7),int(math.ceil((len(self.steps) / 7.0))))
-        for x in range(0, len(self.steps)):
-            if self.steps[x]:
-                tmp.append(dia.ascending()[x])
-        return tmp
-
-    """
-    Maps notes to the drawn map.
-
-    :private:
-    """
-
-    def __mapNotes(self, oc=4):
-        tmp = []
-        ocm = oc
-        added = []
-        m = self.__drawMap()
-        for x in range(0, len(m)):
-            if x % 7 == 0 and x != 0:
+        dia = scales.Diatonic('C', (3,7),int(math.ceil((len(self.steps) / 7.0)))).ascending()
+        k = 0 
+        s = self.steps
+        while (len(s) > 0):
+            if k % 7 == 0 and k != 0:
                 oc += 1
-            if m[x] in added:
-                ocm = oc + 1
-                tmp.append(Note(m[x], ocm))
-            else:
-                tmp.append(Note(m[x], oc))
-            added.append(m[x])
-        
+            if s[0]:
+                tmp.append(Note(dia[0], oc))
+            k += 1
+            s.pop(0)
+            dia.pop(0)
         return tmp
 
     """
@@ -100,4 +84,4 @@ class State:
         time.sleep(t)
 
 
-processSteps([True,False,True,False,False,False,False,True,False,True])
+processSteps([True,True,False,False,False,False,False,False,True,True])
