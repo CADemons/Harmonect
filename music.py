@@ -23,11 +23,12 @@ def processSteps(steps, prev_state=None):
     """
     fluidsynth.init("GeneralUser GS v1.471.sf2")
     current_state = State(steps)
-
+    if (prev_state != None): 
+        prev_state.play()
+        print("Prev state", prev_state.map)
+    current_state.play() 
     print("Current state", current_state.map)
-    if (prev_state != None): prev_state.play(4)
-    current_state.play(4) # 4 seconds is the sweet spot
-
+    time.sleep(4) # 4 seconds is the sweet spot
     return current_state
 
 class State:
@@ -37,12 +38,16 @@ class State:
     :type steps: Boolean Array.
     :param steps: an array which is mapped to the current configuration of steps.
 
+    :type sc: scales.scaleName
+    :param sc: a scales.Object from mingus that you'd like to play. By default, it's a standard Diatonic. Optional field
+
     :example:
     ex = State([True, True, False])
     
     """
-    def __init__(self, steps):
+    def __init__(self, steps, sc=scales.Diatonic):
         self.steps = steps
+        self.sc = sc
         self.map = self.__drawMap()
 
     """
@@ -53,7 +58,7 @@ class State:
     """
     def __drawMap(self, oc=4):
         tmp = []
-        dia = scales.Diatonic('C', (3,7),int(math.ceil((len(self.steps) / 7.0)))).ascending()
+        dia = self.sc('C', (3,7),int(math.ceil((len(self.steps) / 7.0)))).ascending()
         k = 0 
         s = self.steps
         while (len(s) > 0):
@@ -79,9 +84,9 @@ class State:
     play() ==> plays "C", "E"
 
     """
-    def play(self, t):
+    def play(self):
         fluidsynth.play_NoteContainer(NoteContainer(self.map))
-        time.sleep(t)
 
 
-processSteps([True,True,False,False,False,False,False,False,True,True])
+processSteps([True,True,False,False,False,False,False,False,True,True], State([False,False,True]))
+# processSteps([True,True,False,False,False,False,False,False,True,True])
