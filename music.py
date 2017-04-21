@@ -6,12 +6,21 @@ from mingus.midi import fluidsynth
 from mingus.containers import Note
 from mingus.containers import NoteContainer
 
-def processSteps(steps, prev_state=None):
+def processSteps(steps, prev_state=None, sc="Diatonic", start_key="C"):
     """
     Play music when a person is standing on a specific step.
 
     :type steps: Boolean Array
     :param steps: an array which is mapped to the current configuration of steps. 
+
+    :type prev_state: State
+    :param prev_state: A state or the previous state, usually returned via one call of processSteps(). Optional.
+
+    :type sc: String
+    :param sc: Scale name. Optional.
+
+    :type start_key: String
+    :param start_key: Key to start the scale. Optional.
 
     :example:
     processSteps([True,False,False,False])
@@ -22,12 +31,12 @@ def processSteps(steps, prev_state=None):
     processSteps.  
     """
     fluidsynth.init("GeneralUser GS v1.471.sf2")
-    current_state = State(steps)
+    current_state = State(steps, sc, start_key)
     if (prev_state != None): 
         prev_state.play()
-        print("Prev state", prev_state.map)
+        print('Prev state:\n{0}'.format(prev_state))
     current_state.play() 
-    print("Current state", current_state.map)
+    print('Current state:\n{0}'.format(current_state))
     time.sleep(4) # 4 seconds is the sweet spot
     return current_state
 
@@ -38,17 +47,21 @@ class State:
     :type steps: Boolean Array.
     :param steps: an array which is mapped to the current configuration of steps.
 
-    :type sc: scales.scaleName
-    :param sc: a scales.Object from mingus that you'd like to play. By default, it's a standard Diatonic. Optional field
+    :type sc: String
+    :param sc: Scale name. Optional.
 
     :example:
     ex = State([True, True, False])
     
     """
-    def __init__(self, steps, sc=scales.Diatonic):
+    def __init__(self, steps, sc="Diatonic", start_key='C'):
         self.steps = steps
         self.sc = sc
+        self.start_key = start_key
         self.map = self.__drawMap()
+
+    def __str__(self):
+        return 'Map: {0}\nScale: {1}\nStart Key: {2}'.format(self.map, self.sc, self.start_key)
 
     """
     Draws the map based on the current step progression.
@@ -58,18 +71,68 @@ class State:
     """
     def __drawMap(self, oc=4):
         tmp = []
-        dia = self.sc('C', (3,7),int(math.ceil((len(self.steps) / 7.0)))).ascending()
+        scl = self.__scaleArray()
         k = 0 
         s = self.steps
-        while (len(s) > 0):
+        while len(s) > 0:
             if k % 7 == 0 and k != 0:
                 oc += 1
-            if s[0]:
-                tmp.append(Note(dia[0], oc))
+            if s[0]: 
+                tmp.append(Note(scl[0], oc))
             k += 1
             s.pop(0)
-            dia.pop(0)
+            scl.pop(0)
         return tmp
+
+    """
+    Builds scale.
+
+    :private:
+
+    """
+    def __buildScale(self):
+        octa = int(math.ceil((len(self.steps) / 7.0)))
+        return {
+            "Diatonic" : scales.Diatonic(self.start_key, (3,7), octa),
+            "Ionian" : scales.Ionian(self.start_key, octa),
+            "Dorian" : scales.Dorian(self.start_key, octa),
+            "Phrygian" : scales.Phrygian(self.start_key, octa),
+            "Lydian" : scales.Lydian(self.start_key, octa),
+            "Mixolydian" : scales.Mixolydian(self.start_key, octa),
+            "Aeolian" : scales.Aeolian(self.start_key, octa),
+            "Locrian" : scales.Locrian(self.start_key, octa),
+            "Major" : scales.Major(self.start_key, octa),
+            "HarmonicMajor" : scales.HarmonicMajor(self.start_key, octa),
+            "NaturalMinor" : scales.NaturalMinor(self.start_key, octa),
+            "HarmonicMinor" : scales.HarmonicMinor(self.start_key, octa),
+            "MelodicMinor" : scales.MelodicMinor(self.start_key, octa),
+            "Bachian" : scales.Bachian(self.start_key, octa),
+            "MinorNeapolitan" : scales.MinorNeapolitan(self.start_key, octa),
+            "Chromatic" : scales.Chromatic(self.start_key, int(math.ceil((len(self.steps) / 12.0)))),
+            "WholeTone" : scales.WholeTone(self.start_key, int(math.ceil((len(self.steps) / 6.0)))),
+            "Octatonic" : scales.Octatonic(self.start_key, int(math.ceil((len(self.steps) / 8.0))))
+        }[self.sc]
+
+    """
+    Converts scale object to an array.
+
+    :type scl: Scale Object
+    :param scl: Ideally from func buildScale().
+
+    :type mode: String
+    :param mode: Scale mode. Valid values include: `asc` & `desc`. Optional.
+
+    :private:
+
+    """
+
+    def __scaleArray(self, scl=None, mode="asc"):
+        if scl == None: scl = self.__buildScale()
+        return {
+            "asc" : scl.ascending(),
+            "desc" : scl.descending()
+        }.get(mode, "Invalid mode!")
+
 
     """
     Play notes for each activiated step.
@@ -87,6 +150,5 @@ class State:
     def play(self):
         fluidsynth.play_NoteContainer(NoteContainer(self.map))
 
-
-processSteps([True,True,False,False,False,False,False,False,True,True], State([False,False,True]))
+processSteps([True,True,False,False,False,False,True,False,True,True], None, "Diatonic", "A")
 # processSteps([True,True,False,False,False,False,False,False,True,True])
