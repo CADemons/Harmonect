@@ -11,6 +11,8 @@ from mingus.midi import fluidsynth
 from mingus.containers import Note
 from mingus.containers import NoteContainer
 
+fluidsynth.init("GeneralUser GS v1.471.sf2")
+
 def processSteps(steps, prev_state=None, sc="Diatonic", start_key="C"):
     """
     Play music when a person is standing on a specific step.
@@ -35,14 +37,12 @@ def processSteps(steps, prev_state=None, sc="Diatonic", start_key="C"):
     :returns current_state: Returns the current state of the what's playing, so you can call it again in another call of
     processSteps.
     """
-    fluidsynth.init("GeneralUser GS v1.471.sf2")
     current_state = State(steps, sc, start_key)
     if (prev_state is not None):
         prev_state.play()
         print('Prev state:\n{0}'.format(prev_state))
     current_state.play()
     print('Current state:\n{0}'.format(current_state))
-    time.sleep(4)  # 4 seconds is the sweet spot
     return current_state
 
 class State:
@@ -151,5 +151,6 @@ class State:
     def play(self):
         fluidsynth.play_NoteContainer(NoteContainer(self.map))
 
-processSteps([True, True, False, False, False, False, True, False, True, True], None, "Diatonic", "A")
-# processSteps([True,True,False,False,False,False,False,False,True,True])
+if __name__ == '__main__':
+    processSteps([True, True, False, False, False, False, True, False, True, True], None, "Diatonic", "A")
+    time.sleep(4)  # 4 seconds is the sweet spot
