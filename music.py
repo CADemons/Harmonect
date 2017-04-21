@@ -79,13 +79,12 @@ class State:
         scl = self.__scaleArray()
         k = 0
         s = self.steps
-        while len(s) > 0:
+        for step in s:
             if k % 7 == 0 and k != 0:
                 oc += 1
-            if s[0]:
+            if step:
                 tmp.append(Note(scl[0], oc))
             k += 1
-            s.pop(0)
             scl.pop(0)
         return tmp
 
