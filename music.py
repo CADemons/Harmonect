@@ -1,4 +1,10 @@
-# music.py -
+"""
+music.py - handles music
+
+Primary author: Colin Rioux (@colinrioux)
+Supporting authors: Linc Berkeley (@lincb)
+
+"""
 import math, time
 import mingus.core.notes as notes
 import mingus.core.scales as scales
@@ -136,9 +142,7 @@ class State:
 
     """
     Play notes for each activiated step.
-    
-    :type t: Number
-    :param t: Time, in seconds, for delay of chord
+
     :example:
     steps == [True, False]
     play() ==> plays "C" 
