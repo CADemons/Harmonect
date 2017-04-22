@@ -78,8 +78,7 @@ class State:
         tmp = []
         scl = self.__scaleArray()
         k = 0
-        s = self.steps
-        for step in s:
+        for step in self.steps:
             if k % 7 == 0 and k != 0:
                 oc += 1
             if step:
