@@ -10,19 +10,32 @@ import auto_calib
 import step_detect
 import music
 
+import ConfigParser
+
 
 if __name__ == '__main__':
+    settings = ConfigParser.ConfigParser()
+    settigs.read('settings.ini')
+
     if os.geteuid() != 0:
         sys.exit('Error: This program must be run as root')
-    if len(sys.argv) != 8:
-        sys.exit('Usage: musical_stairs.py numStairs depthThreshold downsampleRate waitMs filterPx coverageThresh loadConfig')
-    numStairs = int(sys.argv[1])
-    depthThresh = int(sys.argv[2])
-    dsRate = int(sys.argv[3])
-    waitMs = int(sys.argv[4])
-    filterPx = int(sys.argv[5])
-    coverThresh = float(sys.argv[6])
-    loadConfig = bool(int(sys.argv[7]))
+    # if len(sys.argv) != 8:
+    #     sys.exit('Usage: musical_stairs.py numStairs depthThreshold downsampleRate waitMs filterPx coverageThresh loadConfig')
+    # numStairs = int(sys.argv[1])
+    # depthThresh = int(sys.argv[2])
+    # dsRate = int(sys.argv[3])
+    # waitMs = int(sys.argv[4])
+    # filterPx = int(sys.argv[5])
+    # coverThresh = float(sys.argv[6])
+    # loadConfig = bool(int(sys.argv[7]))
+
+    numStairs = int(settings.get('preferences', 'numStairs'))
+    depthThresh = int(settings.get('preferences', 'depthThresh'))
+    dsRate = int(settings.get('preferences', 'dsRate'))
+    waitMs = int(settings.get('preferences', 'waitMs'))
+    filterPx = int(settings.get('preferences', 'filterPx'))
+    coverThresh = float(settings.get('preferences', 'coverThresh'))
+    loadConfig = bool(settings.get('preferences', 'loadConfig'))
 
     base = ms_tools.getDepth(dsRate)
     time.sleep(.5)
