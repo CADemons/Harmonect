@@ -35,7 +35,7 @@ if __name__ == '__main__':
     waitMs = int(settings.get('preferences', 'waitMs'))
     filterPx = int(settings.get('preferences', 'filterPx'))
     coverThresh = float(settings.get('preferences', 'coverThresh'))
-    loadConfig = bool(settings.get('preferences', 'loadConfig'))
+    loadConfig = bool(int(settings.get('preferences', 'loadConfig')))
 
     base = ms_tools.getDepth(dsRate)
     time.sleep(.5)
