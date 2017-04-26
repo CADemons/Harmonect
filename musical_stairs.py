@@ -15,7 +15,7 @@ import ConfigParser
 
 if __name__ == '__main__':
     settings = ConfigParser.ConfigParser()
-    settigs.read('settings.ini')
+    settings.read('settings.ini')
 
     if os.geteuid() != 0:
         sys.exit('Error: This program must be run as root')
