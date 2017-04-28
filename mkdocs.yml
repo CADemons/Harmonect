@@ -1,5 +1,8 @@
-site_name: DEMONs Musical Stairs Documentation
+site_name: Musinect Documentation
+site_author: Colin Rioux and Linc Berkely
 site_description: Documentation geared towards understanding the majority of the files, and how to use them.
 theme: 'material'
 pages:
 - ['index.md', 'Index']
+repo_url: https://github.com/CADemons/kinect-musical-stairs
+
