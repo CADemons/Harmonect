@@ -1,4 +1,6 @@
 data.csv
+settings.ini
+config.npy
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
