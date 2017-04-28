@@ -14,38 +14,6 @@ from mingus.containers import NoteContainer
 
 fluidsynth.init("GeneralUser GS v1.471.sf2")
 
-# def processSteps(steps, prev_state=None, sc="Diatonic", start_key="C"):
-#     """
-#     Play music when a person is standing on a specific step.
-
-#     :type steps: Boolean Array
-#     :param steps: an array which is mapped to the current configuration of steps.
-
-#     :type prev_state: State
-#     :param prev_state: A state or the previous state, usually returned via one call of processSteps(). Optional.
-
-#     :type sc: String
-#     :param sc: Scale name. Optional.
-
-#     :type start_key: String
-#     :param start_key: Key to start the scale. Optional.
-
-#     :example:
-#     processSteps([True,False,False,False])
-#     ==> maps steps: step 1 = steps[0], step 2 = steps[1], etc etc.
-#     ==> for all true steps, play a specific note
-
-#     :returns current_state: Returns the current state of the what's playing, so you can call it again in another call of
-#     processSteps.
-#     """
-#     current_state = State(steps, sc, start_key)
-#     if (prev_state is not None):
-#         prev_state.play()
-#         print('Prev state:\n{0}'.format(prev_state))
-#     current_state.play()
-#     print('Current state:\n{0}'.format(current_state))
-#     return current_state
-
 class StepPlayer:
 
     """
@@ -140,20 +108,6 @@ class StepPlayer:
         for step, sound in zip(steps, self.soundArr):
             if step:
                 fluidsynth.play_NoteContainer(sound)
-
-    """
-    Plays notes for each activiated step.
-
-    :example:
-    steps == [True, False]
-    play() ==> plays "C"
-
-    steps == [True, False, True]
-    play() ==> plays "C", "E"
-
-    """
-    def play(self):
-        fluidsynth.play_NoteContainer(NoteContainer(self.map))
 
 """
 Finds the steps that are new in the current step array.
