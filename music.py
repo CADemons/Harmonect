@@ -92,25 +92,25 @@ class StepPlayer:
     def __buildScale(self):
         octa = int(math.ceil((self.numSteps / 7.0)))
         return {
-            "Diatonic": scales.Diatonic(self.start_key, (3, 7), octa),
-            "Ionian": scales.Ionian(self.start_key, octa),
-            "Dorian": scales.Dorian(self.start_key, octa),
-            "Phrygian": scales.Phrygian(self.start_key, octa),
-            "Lydian": scales.Lydian(self.start_key, octa),
-            "Mixolydian": scales.Mixolydian(self.start_key, octa),
-            "Aeolian": scales.Aeolian(self.start_key, octa),
-            "Locrian": scales.Locrian(self.start_key, octa),
-            "Major": scales.Major(self.start_key, octa),
-            "HarmonicMajor": scales.HarmonicMajor(self.start_key, octa),
-            "NaturalMinor": scales.NaturalMinor(self.start_key, octa),
-            "HarmonicMinor": scales.HarmonicMinor(self.start_key, octa),
-            "MelodicMinor": scales.MelodicMinor(self.start_key, octa),
-            "Bachian": scales.Bachian(self.start_key, octa),
-            "MinorNeapolitan": scales.MinorNeapolitan(self.start_key, octa),
-            "Chromatic": scales.Chromatic(self.start_key, int(math.ceil((self.numSteps / 12.0)))),
-            "WholeTone": scales.WholeTone(self.start_key, int(math.ceil((self.numSteps / 6.0)))),
-            "Octatonic": scales.Octatonic(self.start_key, int(math.ceil((self.numSteps / 8.0))))
-        }[self.scaleName]
+            "diatonic": scales.Diatonic(self.start_key, (3, 7), octa),
+            "ionian": scales.Ionian(self.start_key, octa),
+            "dorian": scales.Dorian(self.start_key, octa),
+            "phrygian": scales.Phrygian(self.start_key, octa),
+            "lydian": scales.Lydian(self.start_key, octa),
+            "mixolydian": scales.Mixolydian(self.start_key, octa),
+            "aeolian": scales.Aeolian(self.start_key, octa),
+            "locrian": scales.Locrian(self.start_key, octa),
+            "major": scales.Major(self.start_key, octa),
+            "harmonicmajor": scales.HarmonicMajor(self.start_key, octa),
+            "naturalminor": scales.NaturalMinor(self.start_key, octa),
+            "harmonicminor": scales.HarmonicMinor(self.start_key, octa),
+            "melodicminor": scales.MelodicMinor(self.start_key, octa),
+            "bachian": scales.Bachian(self.start_key, octa),
+            "minorneapolitan": scales.MinorNeapolitan(self.start_key, octa),
+            "chromatic": scales.Chromatic(self.start_key, int(math.ceil((self.numSteps / 12.0)))),
+            "wholetone": scales.WholeTone(self.start_key, int(math.ceil((self.numSteps / 6.0)))),
+            "octatonic": scales.Octatonic(self.start_key, int(math.ceil((self.numSteps / 8.0))))
+        }[self.scaleName.lower()]
 
     """
     Converts scale object to an array.
