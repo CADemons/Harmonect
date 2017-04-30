@@ -15,10 +15,7 @@ def test():
     notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
     return notes * 1 + [notes[0]]
 
-def build(i, sekey, iv):
-    if i < 0:
-        return
-    return interval(doc['fn']['key'], sekey, iv) + build(i - 1, interval(doc['fn']['key'], sekey, iv), 1)
+
 
 if __name__ == '__main__':
     #print(listNames())
@@ -28,9 +25,5 @@ if __name__ == '__main__':
 
     with open('test.yml', 'r') as f:
         doc = yaml.load(f)
-    print(build(7, 'D', 1))
-    print(eval(doc['fn']['name']+'("'+doc['fn']['params']+'")'))
-    # cs = scales.Custom(doc['name'], doc['steps'], 'C')
-    # print(cs)
-    # print(cs.name)
+    print(doc['logic'].split(' '))
 
