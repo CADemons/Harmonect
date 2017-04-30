@@ -28,10 +28,11 @@ class StepPlayer:
     ex = State([True, True, False])
 
     """
-    def __init__(self, numSteps, scaleName="Diatonic", start_key='C'):
+    def __init__(self, numSteps, scaleName="Diatonic", start_key='C', instrument=0):
         self.numSteps = numSteps
         self.scaleName = scaleName
         self.start_key = start_key
+        fluidsynth.set_instrument(1, instrument)
         self.soundArr = self.__getSoundArr()
 
     def __str__(self):
