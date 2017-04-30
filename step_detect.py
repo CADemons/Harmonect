@@ -2,8 +2,13 @@ import numpy as np
 
 import ms_tools
 
+MAX_CUTOFF = 255
+MIN_CUTOFF = 0
 
 def getStepArr(masks, base, depth, depthThresh, filterPx, coverThresh):
+    # Filters out values in depth image that are outside of defined depth range
+    depth = np.where(np.logical_and(depth > MIN_CUTOFF, depth < MAX_CUTOFF), depth)
+    
     changed = (base - depth) > depthThresh
     filteredChanged = ms_tools.thinLineFilter(changed, filterPx)
     vid = np.where(filteredChanged, 150, 0)
