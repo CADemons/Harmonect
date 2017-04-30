@@ -12,7 +12,7 @@ def getMasks(baseDepth, numStairs, depthThresh, dsRate, filterPx):
     plt.show(block=False)
     for stairNum in range(1, numStairs + 1):
         raw_input('Press enter to record stair ' + str(stairNum))
-        depth = ms_tools.getDepth(dsRate)
+        depth = ms_tools.getMetric(dsRate)
         changed = (baseDepth - depth) > depthThresh
         filteredChanged = ms_tools.thinLineFilter(changed, filterPx)
         masks[stairNum - 1] = filteredChanged

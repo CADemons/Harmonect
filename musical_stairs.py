@@ -37,9 +37,9 @@ if __name__ == '__main__':
     coverThresh = float(settings.get('preferences', 'coverThresh'))
     loadConfig = bool(int(settings.get('preferences', 'loadConfig')))
 
-    base = ms_tools.getDepth(dsRate)
+    base = ms_tools.getMetric(dsRate)
     time.sleep(.5)
-    base = ms_tools.getDepth(dsRate)
+    base = ms_tools.getMetric(dsRate)
     plt.figure()
     plt.imshow(base, cmap=plt.cm.gray)
     plt.show(block=False)
@@ -57,7 +57,7 @@ if __name__ == '__main__':
     oldSteps = None
     print('Press ESC in window to stop')
     while 1:
-        depth = ms_tools.getDepth(dsRate)
+        depth = ms_tools.getMetric(dsRate)
 
         steps, vid = step_detect.getStepArr(masks, base, depth, depthThresh, filterPx, coverThresh)
         cv2.imshow('Depth', vid)
