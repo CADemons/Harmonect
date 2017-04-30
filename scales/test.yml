@@ -1,0 +1,8 @@
+name: 'Major'
+base: 'natural'
+key: 'C'
+fn:
+    name: get_notes
+    params: 'C'
+steps: 
+    - all: 'whole'

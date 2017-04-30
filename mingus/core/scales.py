@@ -604,3 +604,17 @@ class Octatonic(_Scale):
         notes[-2] = intervals.major_sixth(notes[0])
         return notes * self.octaves + [notes[0]]
 
+class Custom(_Scale):
+    type = 'other'
+
+    def __init__(self, name, base, stepi, note, octaves=1):
+        
+        super(Custom, self).__init__(note, octaves)
+        self.name = '{0} {1}'.format(self.tonic, name)
+        self.base = base
+
+    def ascending(self):
+        notes = get_notes(self.tonic)
+        return notes * self.octaves + [notes[0]]
+
+
