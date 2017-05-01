@@ -7,7 +7,7 @@ Supporting authors: Linc Berkeley (@lincb)
 """
 import math, time
 import numpy as np
-import mingus.core.scales as scales
+from mingus.core import scales, notes
 from mingus.midi import fluidsynth
 from mingus.containers import Note
 from mingus.containers import NoteContainer
@@ -44,11 +44,14 @@ class StepPlayer:
     def __getSoundArr(self, startOc=4):
         tmp = []
         scl = self.__scaleArray()
-        oc = startOc - 1
-        firstNote = scl[0]
+        oc = startOc
+        lastNoteInt = 0  # Prevent first note from incrementing octave
         for note in scl:
-            if note == firstNote:
+            # When int value of note wraps to 0, octave should increment
+            noteInt = notes.note_to_int(note)
+            if noteInt < lastNoteInt:
                 oc += 1
+            lastNoteInt = noteInt
             tmp.append(NoteContainer(Note(note, oc)))
         return tmp
 
