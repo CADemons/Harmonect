@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/CADemons/Harmonect/master/logo/logo.pngg"/>
+    <img src="https://raw.githubusercontent.com/CADemons/Harmonect/master/logo/logo.png"/>
 </p>
 
 Harmonect is `________`. It is currently in it's alpha phase of development. 
