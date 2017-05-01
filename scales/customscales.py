@@ -2,7 +2,7 @@ import os, yaml
 import mingus.core.scales as scales
 
 from mingus.core.keys import get_notes
-from mingus.core.intervals import interval
+from mingus.core.intervals import interval, second
 
 def listNames():
     ls = os.listdir('.')
@@ -15,6 +15,13 @@ def test():
     notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
     return notes * 1 + [notes[0]]
 
+def buildFn(pos, key):
+    p = pos.split(',')
+    print(p[0])
+    return {
+        "second": second(p[1], key),
+        "interval": interval(key, p[1], int(p[2] if 2 < len(p) else -1))
+    }[p[0]]
 
 
 if __name__ == '__main__':
@@ -23,7 +30,13 @@ if __name__ == '__main__':
     # print(get_notes('C'))
     # print(get_notes('c'))
 
-    with open('test.yml', 'r') as f:
+    with open('major.yml', 'r') as f:
         doc = yaml.load(f)
-    print(doc['logic'].split(' '))
+    # tmp = [doc['key']]
+    # for item in doc['logic'].split(' '):
+    #     tmp.append(buildFn(item, doc['key']))
+    #     print tmp
+    # #print tmp
+    p = scales.Custom(doc['name'], doc['logic'].split(' '), doc['key'])
+    print(p.ascending())
 

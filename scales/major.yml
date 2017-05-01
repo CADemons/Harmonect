@@ -1,0 +1,4 @@
+name: 'Major'
+key: 'C'
+octaves: 2
+logic: 'interval,C,1 interval,D,1 interval,E,1 interval,F,1 interval,G,1 interval,A,1'

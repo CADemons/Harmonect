@@ -1,4 +1,0 @@
-name: 'Major'
-base: 'natural'
-key: 'C'
-logic: '1:interval,D,1 2:interval,E,1 3:interval,F,1 4:interval,G,1 5:interval,A,1 6:interval,B,1 7:interval,C,1'

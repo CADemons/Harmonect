@@ -607,14 +607,26 @@ class Octatonic(_Scale):
 class Custom(_Scale):
     type = 'other'
 
-    def __init__(self, name, base, stepi, note, octaves=1):
+    def __init__(self, name, cmd_arr, key, octaves=1):
         
-        super(Custom, self).__init__(note, octaves)
+        super(Custom, self).__init__(key, octaves)
         self.name = '{0} {1}'.format(self.tonic, name)
-        self.base = base
+        self.key = key
+        self.octaves = octaves
+        self.cmd_arr = cmd_arr
 
     def ascending(self):
-        notes = get_notes(self.tonic)
+        notes = [self.key]
+        for item in self.cmd_arr:
+            notes.append(self.buildFn(item, self.key))
         return notes * self.octaves + [notes[0]]
+        # notes = get_notes(self.tonic)
+        # return notes * self.octaves + [notes[0]]
 
+    def buildFn(self, pos, key):
+            p = pos.split(',')
+            return {
+                "second": intervals.second(p[1], key),
+                "interval": intervals.interval(key, p[1], int(p[2] if 2 < len(p) else -1))
+            }[p[0]]
 
