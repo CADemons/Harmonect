@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/CADemons/Musinect/master/musinect.png"/>
+    <img src="https://raw.githubusercontent.com/CADemons/Harmonect/master/logo/logo.png"/>
 </p>
 
 # Harmonect
