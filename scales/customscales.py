@@ -37,6 +37,5 @@ if __name__ == '__main__':
     #     tmp.append(buildFn(item, doc['key']))
     #     print tmp
     # #print tmp
-    p = scales.Custom(doc['name'], doc['logic'].split(' '), doc['key'])
-    print(p.ascending())
+    print(doc['ascending'])
 

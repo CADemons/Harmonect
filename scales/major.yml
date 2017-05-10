@@ -1,4 +1,5 @@
 name: 'Major'
 key: 'C'
-octaves: 1
-logic: 'interval,C,1 interval,D,1 interval,E,1 interval,F,1 interval,G,1 interval,A,1'
+range: 1
+octave: 4
+ascending: 'C D E F G A B'
