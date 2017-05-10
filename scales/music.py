@@ -129,6 +129,6 @@ if __name__ == '__main__':
     with open('major.yml', 'r') as f:
         doc = yaml.load(f)
     p = scales.Custom(doc['name'], doc['logic'].split(' '), doc['key'], doc['octaves'])
-    print(p.ascending())
+    print(p.descending())
     fluidsynth.play_NoteContainer(NoteContainer(p.ascending()))
     time.sleep(4)

@@ -628,16 +628,15 @@ class Custom(_Scale):
             p = pos.split(',')
             return {
                 "interval": intervals.interval(key, p[1], int(p[2] if 2 < len(p) else -1)),
-                "unison": intervals.unison(p[1]),
                 "unisonMinor": intervals.minor_unison(p[1]),
                 "unisonMajor": intervals.major_unison(p[1]),
                 "unisonAugmented": intervals.augmented_unison(p[1]),
                 "second": intervals.second(p[1], key),
-                "secondMinor": interval.minor_second(p[1]),
-                "secondMajor": interval.major_second(p[1]),
+                "secondMinor": intervals.minor_second(p[1]),
+                "secondMajor": intervals.major_second(p[1]),
                 "third": intervals.third(p[1], key),
-                "thirdMinor": interval.minor_third(p[1]),
-                "thirdMajor": interval.major_third(p[1]),
+                "thirdMinor": intervals.minor_third(p[1]),
+                "thirdMajor": intervals.major_third(p[1]),
                 "fourth": intervals.fourth(p[1], key),
                 "fourthMinor": intervals.minor_fourth(p[1]),
                 "fourthMajor": intervals.major_fourth(p[1]),
@@ -651,8 +650,6 @@ class Custom(_Scale):
                 "sixthMajor": intervals.major_sixth(p[1]),
                 "seventh": intervals.seventh(p[1], key),
                 "seventhMinor": intervals.minor_seventh(p[1]),
-                "seventhMajor": intervals.major_seventh(p[1]),
-                "invert": intervals.invert(p[1]), #p[1] must be a list somehow
-                "noteOnInterval": intervals.from_shorthand(p[1], int(p[2] if 2 < len(p) else -1), int(p[3] if 3 < len(p) else -1))
+                "seventhMajor": intervals.major_seventh(p[1])
             }[p[0]]
 
