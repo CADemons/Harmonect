@@ -20,9 +20,9 @@ Currently, Harmonect is meant to be a standalone application. However, in the fu
 
 ## Getting Stared
 ### Dependency Installation (Mac)
-1. Install Homebew and OpenCV using steps 1 through 4 [here](http://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/). If you already have Xcode, Homebrew, and homebrewed Python 2.7 installed, you can skip steps 1 through 3.
-2. Install libfreenect using Homebrew: `brew install libfreenect`
-3. Install fluidsynth using Homebrew: `brew install fluidsynth pkg-config`
+1. Install Homebrew and OpenCV using steps 1 through 4 [here](http://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/). If you already have Xcode, Homebrew, and homebrewed Python 2.7 installed, you can skip steps 1 through 3.
+2. Install libfreenect using Homebrew: `$ brew install libfreenect`
+3. Install fluidsynth using Homebrew: `$ brew install fluidsynth pkg-config`
 4. Continue to "Download and Run"
 
 ### Download and Run (All Platforms)
