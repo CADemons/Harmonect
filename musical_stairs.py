@@ -44,7 +44,7 @@ if __name__ == '__main__':
     plt.imshow(base, cmap=plt.cm.gray)
     plt.show(block=False)
 
-    player = music.StepPlayer(numStairs, settings.get('music','scale'), settings.get('music','startKey'))
+    player = music.StepPlayer(numStairs, settings.get('music','scale'), settings.get('music','startKey'), int(settings.get('music','instrument')))
     print player
 
     if loadConfig:
