@@ -19,9 +19,16 @@ Currently, Harmonect is meant to be a standalone application. However, in the fu
 5. (Optional) Raspberry Pi
 
 ## Getting Stared
+### Dependency Installation (Mac)
+1. Install Homebew and OpenCV using steps 1 through 4 [here](http://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/). If you already have Xcode, Homebrew, and homebrewed Python 2.7 installed, you can skip steps 1 through 3.
+2. Install libfreenect using Homebrew: `brew install libfreenect`
+3. Install fluidsynth using Homebrew: `brew install fluidsynth pkg-config`
+4. Continue to "Download and Run"
+
+### Download and Run (All Platforms)
 1. Clone the repository: `$ git clone https://github.com/CADemons/kinect-musical-stairs.git`
 2. Navigate to the cloned folder: `$ cd kinect-musical-stairs`
-3. Install the dependencies: `$ pip install -r requirements.txt`
+3. Install the Python dependencies: `$ pip install -r requirements.txt`
 4. Clone `settings-template.ini` to `settings.ini` 
 5. Edit `settings.ini` with your preferences
 6. Run `musical_stairs.py` 
