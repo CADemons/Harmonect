@@ -19,18 +19,26 @@ Currently, Harmonect is meant to be a standalone application. However, in the fu
 5. (Optional) Raspberry Pi
 
 ## Getting Stared
-### Dependency Installation (Mac)
+### Installation (Mac)
 1. Install Homebrew and OpenCV using steps 1 through 4 [here](http://www.pyimagesearch.com/2016/12/19/install-opencv-3-on-macos-with-homebrew-the-easy-way/). If you already have Xcode, Homebrew, and homebrewed Python 2.7 installed, you can skip steps 1 through 3.
 2. Install libfreenect using Homebrew: `$ brew install libfreenect`
 3. Install fluidsynth using Homebrew: `$ brew install fluidsynth pkg-config`
-4. Continue to "Download and Run"
+4. Clone the repository: `$ git clone https://github.com/CADemons/Harmonect.git`
+5. Navigate to the cloned folder: `$ cd Harmonect`
+6. Install the Python dependencies: `$ pip install -r requirements.txt`, `$ cd ..`
+7. Download the libfreenect Python files: `$ git clone https://github.com/OpenKinect/libfreenect.git`
+8. Install the libfreenect Python module: `$ cd libfreenect/wrappers/python/`, `$ sudo python setup.py install`, `$ cd ../../..`
+9. Continue to "Configure and Run"
 
-### Download and Run (All Platforms)
-1. Clone the repository: `$ git clone https://github.com/CADemons/Harmonect.git`
-2. Navigate to the cloned folder: `$ cd kinect-musical-stairs`
-3. Install the Python dependencies: `$ pip install -r requirements.txt`
-4. Download the libfreenect Python files: `$ git clone https://github.com/OpenKinect/libfreenect.git`
-5. Install the libfreenect Python module: `$ cd libfreenect/wrappers/python/`, `$ sudo python setup.py install`
-6. Clone `settings-template.ini` to `settings.ini` 
-7. Edit `settings.ini` with your preferences
-8. Run `$ sudo python musical_stairs.py` 
+### Installation (Raspberry Pi Raspbian)
+1. Install the dependencies using the instructions [here](http://blog.tunpixel.tn/2014/10/27/kinect-rasp/)
+2. Clone the repository: `$ git clone https://github.com/CADemons/Harmonect.git`
+3. Navigate to the cloned folder: `$ cd Harmonect`
+4. Install the Python dependencies: `$ pip install -r requirements.txt`, `$ cd ..`
+5. Continue to "Configure and Run"
+
+### Configure and Run (All Platforms)
+1. Navigate to the Harmonect folder: `$ cd Harmonect`
+2. Clone `settings-template.ini` to `settings.ini` 
+3. Edit `settings.ini` with your preferences
+4. Run `$ sudo python musical_stairs.py` 
