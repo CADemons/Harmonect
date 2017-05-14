@@ -5,7 +5,7 @@ Primary author: Colin Rioux (@colinrioux)
 Supporting authors: Linc Berkeley (@lincb)
 
 """
-import math, time
+import math, time, yaml, os, types
 import numpy as np
 import mingus.core.scales as scales
 from mingus.midi import fluidsynth
@@ -78,7 +78,30 @@ class StepPlayer:
             "chromatic": scales.Chromatic(self.start_key, int(math.ceil((self.numSteps / 12.0)))),
             "wholetone": scales.WholeTone(self.start_key, int(math.ceil((self.numSteps / 6.0)))),
             "octatonic": scales.Octatonic(self.start_key, int(math.ceil((self.numSteps / 8.0))))
-        }[self.scaleName.lower()]
+        }.get(self.scaleName.lower(), "custom")
+
+    """
+    If the scale is custom, it reads the yaml file (if it exists) and returns the yaml.
+
+    """
+    def __buildCustomScale(self, name):
+        ls = os.listdir('./scales')
+        filename = ''
+        for item in ls:
+            if item == (name.lower() + '.yml'):
+                filename = item
+        if filename is '': raise ValueError('Custom scale doesn\'t exist!')
+        with open('./scales/' + filename, 'r') as f:
+            doc = yaml.load(f)
+        return doc
+
+    """
+    Builds ascending array for a custom scale.
+
+    """
+    def __handleCustom(self, notes, r):
+        return notes * r + [notes[0]]
+
 
     """
     Converts scale object to an array.
@@ -92,12 +115,19 @@ class StepPlayer:
     :private:
 
     """
-    def __scaleArray(self, scl=None, mode="asc"):
-        if scl is None: scl = self.__buildScale()
-        return {
-            "asc": scl.ascending(),
-            "desc": scl.descending()
-        }.get(mode, "Invalid mode!")
+    def __scaleArray(self, mode="asc"):
+        scl = self.__buildScale()
+        if type(scl) == types.StringType and scl == "custom":
+            d = self.__buildCustomScale(self.scaleName.split(' ')[1])
+            return {
+                "asc": self.__handleCustom(d['ascending'].split(' '), d['range']),
+                "desc": self.__handleCustom(d['ascending'].split(' '), d['range']).reverse() 
+            }.get(mode, "Invalid mode!")
+        else:
+            return {
+                "asc": scl.ascending(),
+                "desc": scl.descending()
+            }.get(mode, "Invalid mode!")
 
     """
     Plays music corresponding to the given array of steps.
@@ -122,7 +152,11 @@ def getNewSteps(currentSteps, oldSteps):
     return np.logical_and(currentSteps, np.logical_not(oldSteps))
 
 if __name__ == '__main__':
-    player = StepPlayer(10, "Diatonic", "A")
-    player.processSteps([True, True, False, False, False, False, True, False, True, True])
+    # player = StepPlayer(10, "Diatonic", "A")
+    # player.processSteps([True, True, False, False, False, False, True, False, True, True])
+    # print player
+    player = StepPlayer(10, "Custom Major")
+    player.processSteps([True, True, False])
     print player
-    time.sleep(4)  # 4 seconds is the sweet spot
+    time.sleep(4)
+    # fluidsynth.play_NoteContainer(NoteContainer(p.ascending())
