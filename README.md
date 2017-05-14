@@ -26,9 +26,11 @@ Currently, Harmonect is meant to be a standalone application. However, in the fu
 4. Continue to "Download and Run"
 
 ### Download and Run (All Platforms)
-1. Clone the repository: `$ git clone https://github.com/CADemons/kinect-musical-stairs.git`
+1. Clone the repository: `$ git clone https://github.com/CADemons/Harmonect.git`
 2. Navigate to the cloned folder: `$ cd kinect-musical-stairs`
 3. Install the Python dependencies: `$ pip install -r requirements.txt`
-4. Clone `settings-template.ini` to `settings.ini` 
-5. Edit `settings.ini` with your preferences
-6. Run `musical_stairs.py` 
+4. Download the libfreenect Python files: `$ git clone https://github.com/OpenKinect/libfreenect.git`
+5. Install the libfreenect Python module: `$ cd libfreenect/wrappers/python/`, `$ sudo python setup.py install`
+6. Clone `settings-template.ini` to `settings.ini` 
+7. Edit `settings.ini` with your preferences
+8. Run `$ sudo python musical_stairs.py` 
