@@ -1,0 +1,21 @@
+name: 'Pentatonic Major'
+range: 1
+octave: 4
+ascending:
+  C: 'C D E G A'
+  C#: 'C# D# F G# A#'
+  Db: 'C# D# F G# A#'
+  D: 'D E F# A B'
+  D#: 'D# F G A# C'
+  Eb: 'D# F G A# C'
+  E: 'E F# G# B C#'
+  F: 'F G A C D'
+  F#: 'F# G# A# C# D#'
+  Gb: 'F# G# A# C# D#'
+  G: 'G A B D E'
+  G#: 'G# A# C D# F'
+  Ab: 'G# A# C D# F'
+  A: 'A B C# E F#'
+  A#: 'A# C D F G'
+  Bb: 'A# C D F G'
+  B: 'B C# D# F# G#'

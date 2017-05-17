@@ -1,0 +1,21 @@
+name: 'Pentatonic Minor'
+range: 1
+octave: 4
+ascending:
+  C: 'C Eb F G Bb'
+  C#: 'C# E F# G# B'
+  Db: 'C# E F# G# B'
+  D: 'D F G A C'
+  D#: 'D# F# G# A# C#'
+  Eb: 'D# F# G# A# C#'
+  E: 'E G A B D'
+  F: 'F Ab Bb C Eb'
+  F#: 'F# A B C# E'
+  Gb: 'F# A B C# E'
+  G: 'G Bb C D F'
+  G#: 'G# B C# D# F#'
+  Ab: 'G# B C# D# F#'
+  A: 'A C D E G'
+  A#: 'A# C# D# E# G#'
+  Bb: 'A# C# D# E# G#'
+  B: 'B D E F# A'

@@ -1,6 +1,6 @@
 name: 'Major'
 range: 1
-octave: 1
+octave: 4
 ascending: 
   C: 'C D E F G A B'
   Cb: 'Cb Db Eb Fb Gb Ab Bb'
