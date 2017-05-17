@@ -28,12 +28,13 @@ class StepPlayer:
     ex = State([True, True, False])
 
     """
-    def __init__(self, numSteps, scaleName="Diatonic", start_key='C', instrument=0):
+    def __init__(self, numSteps, scaleName="Diatonic", start_key='C', instrument=0, octave=4):
         self.numSteps = numSteps
         self.scaleName = scaleName
         self.start_key = start_key
+        self.octave = octave
         fluidsynth.set_instrument(1, instrument)
-        self.soundArr = self.__getSoundArr()
+        self.soundArr = self.__getSoundArr(self.octave)
 
     def __str__(self):
         return 'Map: {0}\nScale: {1}\nStart Key: {2}'.format(self.soundArr, self.scaleName, self.start_key)
@@ -44,7 +45,10 @@ class StepPlayer:
     def __getSoundArr(self, startOc=4):
         tmp = []
         scl = self.__scaleArray()
-        oc = startOc
+        if (self.scaleName.split(' ')[0].lower() == "custom"):
+            oc = self.__buildCustomScale(self.scaleName.split(' ')[1])['octave']
+        else:
+            oc = startOc
         lastNoteInt = 0  # Prevent first note from incrementing octave
         for note in scl:
             # When int value of note wraps to 0, octave should increment
@@ -124,8 +128,8 @@ class StepPlayer:
         if type(scl) == types.StringType and scl == "custom":
             d = self.__buildCustomScale(self.scaleName.split(' ')[1])
             return {
-                "asc": self.__handleCustom(d['ascending'].split(' '), d['range']),
-                "desc": self.__handleCustom(d['ascending'].split(' '), d['range']).reverse() 
+                "asc": self.__handleCustom(d['ascending'][self.start_key].split(' '), d['range']),
+                "desc": self.__handleCustom(d['ascending'][self.start_key].split(' '), d['range']).reverse() 
             }.get(mode, "Invalid mode!")
         else:
             return {
@@ -159,7 +163,7 @@ if __name__ == '__main__':
     # player = StepPlayer(10, "Diatonic", "A")
     # player.processSteps([True, True, False, False, False, False, True, False, True, True])
     # print player
-    player = StepPlayer(10, "Custom Major")
+    player = StepPlayer(10, "Custom Major", "F#")
     player.processSteps([True, True, False])
     print player
     time.sleep(4)

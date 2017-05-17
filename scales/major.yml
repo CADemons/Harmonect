@@ -1,5 +1,19 @@
 name: 'Major'
-key: 'C'
 range: 1
-octave: 4
-ascending: 'C D E F G A B'
+octave: 1
+ascending: 
+  C: 'C D E F G A B'
+  Cb: 'Cb Db Eb Fb Gb Ab Bb'
+  C#: 'C# D# E# F# G# A# B#'
+  D: 'D E F# G A B C#'
+  Db: 'Db Eb F Gb Ab Bb C'
+  E: 'E F# G# A B C# D#'
+  Eb: 'Eb F G Ab Bb C D'
+  F: 'F G A Bb C D E'
+  F#: 'F# G# A# B C# D# E#'
+  G: 'G A B C D E F#'
+  Gb: 'Gb Ab Bb Cb Db Eb F'
+  A: 'A B C# D E F# G#'
+  Ab: 'Ab Bb C Db Eb F G'
+  B: 'B C# D# E F# G# A#'
+  Bb: 'Bb C D Eb F G A'
