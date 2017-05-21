@@ -140,11 +140,11 @@ class StepPlayer:
     """
     Plays music corresponding to the given array of steps.
     """
-    def processSteps(self, steps, oldSteps=None):
+    def processSteps(self, steps, oldSteps=None, chord=False):
         if oldSteps is not None:
             steps = getNewSteps(steps, oldSteps)
         for step, sound in zip(steps, self.soundArr):
-            if step:
+            if step and not chord:
                 fluidsynth.play_NoteContainer(sound)
 
 """
